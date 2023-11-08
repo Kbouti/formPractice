@@ -1,0 +1,21 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+
+#practiceForm{
+    display:flex;
+    flex-direction: column;
+    border:3px solid black;
+    padding: 2rem;
+}
+
+#practiceForm > div{
+    padding:.2rem;
+}
+
+:invalid{
+    background-color: brown;
+}
