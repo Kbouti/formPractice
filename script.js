@@ -7,7 +7,6 @@ const confirmPasswordInput = document.getElementById(`confirmPasswordInput`);
 
 function checkEmailInput() {
   if (emailInput.validity.typeMismatch) {
-    console.log(`non-email detected in email input`);
     emailInput.classList.add(`invalid`);
     emailError.textContent = `^^That's not a real email!`;
     emailError.classList.add(`active`);
@@ -26,9 +25,7 @@ function checkEmailInput() {
 }
 
 function checkZipInput() {
-  console.log(zipInput.value);
   if (zipInput.value == ``) {
-    console.log(`empty string detected`);
     zipError.textContent = `Requires a 5 digit number`;
     zipError.classList.add(`active`);
     zipInput.classList.add(`invalid`);
@@ -58,34 +55,42 @@ function checkForm() {
   results.push(checkZipInput());
 
   console.log(results);
-  
+  const test = results === [false, false] 
+  console.log(test);
+
   switch (results) {
-    case [false, false]: {
+    case [false, false]: 
+        console.log(`switch triggered`)
       console.log(results);
       alert(`Check your email and zip code`);
-    }
-    case [true, false]: {
+      break;
+    
+    case [true, false]: 
+        console.log(`switch triggered`)
         console.log(results);
       alert(`Check your zip code plz`);
-    }
+      break;
+    
     case [false, true]: {
+        console.log(`switch triggered`)
       alert(`Give us your goddamn email`);
+      break;
     }
     case [true, true]: {
+        console.log(`switch triggered`)
       alert(`Thanks for your info!`);
+      break;
     }
+    default: console.log(`default`);
   }
 
-  //   if (!checkEmailInput()) {
-  //     alert(`Check you email, we really need that`);
-  //   }
-  //   else if (!checkZipInput()) {
-  //     alert(`Zip code pretty please`);
-  //   }
 
-  //   else {
-  //     alert(`Thanks for filling out the form!`);
-  //   }
+
+// Switch statement won't work with an array, but we can accomplish the same thing with a string. Try that next
+// Or if I really want to use an array, we need to make an array for each of the possible cases, and compare the result to a variable (Not an array)
+
+
+
 }
 
 practiceForm.reset();
