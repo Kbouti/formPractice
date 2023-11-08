@@ -16,6 +16,6 @@ body{
     padding:.2rem;
 }
 
-:invalid{
-    background-color: brown;
+input:invalid{
+    background-color: rgb(203, 96, 96);
 }
