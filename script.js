@@ -52,17 +52,40 @@ function checkZipInput() {
 }
 
 function checkForm() {
-  if (!checkEmailInput()) {
-    console.log(`dun fucked up now, yah hear`);
-    alert(`Please give us your email`);
-  } else {
-    if (!checkZipInput()){
-        alert(`Check your zip code and try again`);
-    } 
-    else {
-    alert(`thanks for filling out my form!`);
+  let results = [];
+
+  results.push(checkEmailInput());
+  results.push(checkZipInput());
+
+  console.log(results);
+  
+  switch (results) {
+    case [false, false]: {
+      console.log(results);
+      alert(`Check your email and zip code`);
+    }
+    case [true, false]: {
+        console.log(results);
+      alert(`Check your zip code plz`);
+    }
+    case [false, true]: {
+      alert(`Give us your goddamn email`);
+    }
+    case [true, true]: {
+      alert(`Thanks for your info!`);
+    }
   }
-}
+
+  //   if (!checkEmailInput()) {
+  //     alert(`Check you email, we really need that`);
+  //   }
+  //   else if (!checkZipInput()) {
+  //     alert(`Zip code pretty please`);
+  //   }
+
+  //   else {
+  //     alert(`Thanks for filling out the form!`);
+  //   }
 }
 
 practiceForm.reset();
