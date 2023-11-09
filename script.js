@@ -49,48 +49,49 @@ function checkZipInput() {
 }
 
 function checkForm() {
-  let results = [];
+  let results = "";
 
-  results.push(checkEmailInput());
-  results.push(checkZipInput());
+  if (checkEmailInput()) {
+    results += `t`;
+  } else {
+    results += `f`;
+  }
+
+  if (checkZipInput()) {
+    results += `t`;
+  } else {
+    results += `f`;
+  }
 
   console.log(results);
-  const test = results === [false, false] 
-  console.log(test);
 
   switch (results) {
-    case [false, false]: 
-        console.log(`switch triggered`)
-      console.log(results);
+    case `ff`:
       alert(`Check your email and zip code`);
       break;
-    
-    case [true, false]: 
-        console.log(`switch triggered`)
-        console.log(results);
+
+    case `tf`:
+      console.log(`switch triggered`);
+      console.log(results);
       alert(`Check your zip code plz`);
       break;
-    
-    case [false, true]: {
-        console.log(`switch triggered`)
+
+    case `ft`: {
+      console.log(`switch triggered`);
       alert(`Give us your goddamn email`);
       break;
     }
-    case [true, true]: {
-        console.log(`switch triggered`)
+    case `tt`: {
+      console.log(`switch triggered`);
       alert(`Thanks for your info!`);
       break;
     }
-    default: console.log(`default`);
+    default:
+      console.log(`default`);
   }
 
-
-
-// Switch statement won't work with an array, but we can accomplish the same thing with a string. Try that next
-// Or if I really want to use an array, we need to make an array for each of the possible cases, and compare the result to a variable (Not an array)
-
-
-
+  // Switch statement won't work with an array, but we can accomplish the same thing with a string. Try that next
+  // Or if I really want to use an array, we need to make an array for each of the possible cases, and compare the result to a variable (Not an array)
 }
 
 practiceForm.reset();
