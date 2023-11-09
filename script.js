@@ -107,4 +107,6 @@ zipInput.addEventListener(`input`, function () {
 practiceForm.addEventListener(`submit`, function (event) {
   event.preventDefault();
   checkForm();
+
+  practiceForm.reset();
 });
