@@ -77,22 +77,44 @@ function gatherResults() {
   } else {
     results += `f`;
   }
+
+  if (checkPasswordLength()) {
+    results += `t`;
+  } else {
+    results += `f`;
+  }
   return results;
 }
 
 function checkForm(results) {
   switch (results) {
-    case `ff`:
-      alert(`Check your email and zip code`);
+    case `fff`:
+      alert(
+        `Email, zip code, and password length are all invalid. Please try again. `
+      );
       return false;
-    case `tf`:
-      alert(`Check your zip code plz`);
+
+    case `tff`:
+      alert(`Check your zip code and password plz`);
       return false;
-    case `ft`: {
+    case `ftf`:
+      alert(`Please check your email and password`);
+      return false;
+    case `fft`:
+      alert(`Check your email and zip code please`);
+
+    case `tft`:
+      alert(`Check your zip code please`);
+      return false;
+    case `ttf`:
+      alert(`Your password isn't long enough`);
+      return false;
+    case `ftt`: {
       alert(`Give us your goddamn email`);
       return false;
     }
-    case `tt`: {
+    
+    case `ttt`: {
       alert(`Thanks for your info!`);
       return true;
     }
@@ -114,9 +136,9 @@ zipInput.addEventListener(`input`, function () {
   checkZipInput();
 });
 
-passwordInput.addEventListener(`input`, function(){
+passwordInput.addEventListener(`input`, function () {
   checkPasswordLength();
-})
+});
 
 practiceForm.addEventListener(`submit`, function (event) {
   event.preventDefault();
