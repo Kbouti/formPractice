@@ -65,6 +65,24 @@ function checkPasswordLength() {
   return checkPassed;
 }
 
+function checkPasswordMatch() {
+  let checkPassed = false;
+  let password1 = passwordInput.value;
+  let password2 = confirmPasswordInput.value;
+  if (password1 === password2) {
+    checkPassed = true;
+    confirmPasswordInput.classList.remove(`invalid`);
+    confirmPasswordError.classList.remove(`active`);
+    confirmPasswordError.textContent = ``;
+  } else {
+    confirmPasswordInput.classList.add(`invalid`);
+    confirmPasswordError.classList.add(`active`);
+    confirmPasswordError.textContent = `Passwords don't match`;
+    checkPassed = false;
+  }
+  return checkPassed;
+}
+
 function gatherResults() {
   let results = "";
   if (checkEmailInput()) {
@@ -77,8 +95,12 @@ function gatherResults() {
   } else {
     results += `f`;
   }
-
   if (checkPasswordLength()) {
+    results += `t`;
+  } else {
+    results += `f`;
+  }
+  if (checkPasswordMatch()) {
     results += `t`;
   } else {
     results += `f`;
@@ -88,34 +110,51 @@ function gatherResults() {
 
 function checkForm(results) {
   switch (results) {
-    case `fff`:
+    case `ffft`:
       alert(
         `Email, zip code, and password length are all invalid. Please try again. `
       );
       return false;
-
-    case `tff`:
+    case `ffff`:
+      alert(
+        `Email, zip code, and password are all invalid. You didn't get anything right. `
+      );
+      return false;
+    case `tfft`:
+      alert(`Check your zip code and password length plz`);
+      return false;
+    case `tfff`:
       alert(`Check your zip code and password plz`);
       return false;
-    case `ftf`:
+    case `tftf`:
+      alert(`Check your zip code and password plz`);
+      return false;
+    case `ftft`:
       alert(`Please check your email and password`);
       return false;
-    case `fft`:
+    case `ftff`:
+      alert(`Please check your email and password`);
+      return false;
+    case `fftt`:
       alert(`Check your email and zip code please`);
-
-    case `tft`:
+      return false;
+    case `tftt`:
       alert(`Check your zip code please`);
       return false;
-    case `ttf`:
+    case `ttft`:
       alert(`Your password isn't long enough`);
       return false;
-    case `ftt`: {
+    case `fttt`: {
       alert(`Give us your goddamn email`);
       return false;
     }
-    
-    case `ttt`: {
+    case `tttf`: {
+      alert(`Your passwords don't match!`);
+      return false;
+    }
+    case `tttt`: {
       alert(`Thanks for your info!`);
+      practiceForm.reset();
       return true;
     }
     default:
@@ -138,12 +177,16 @@ zipInput.addEventListener(`input`, function () {
 
 passwordInput.addEventListener(`input`, function () {
   checkPasswordLength();
+  checkPasswordMatch();
+});
+
+confirmPasswordInput.addEventListener(`input`, function () {
+  checkPasswordLength();
+  checkPasswordMatch();
 });
 
 practiceForm.addEventListener(`submit`, function (event) {
   event.preventDefault();
   let results = gatherResults();
-  if (checkForm(results)) {
-    practiceForm.reset();
-  }
+  checkForm(results);
 });
