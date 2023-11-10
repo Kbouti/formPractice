@@ -54,37 +54,28 @@ function gatherResults() {
     results += `t`;
   } else {
     results += `f`;
-  }
-
+  };
   if (checkZipInput()) {
     results += `t`;
   } else {
     results += `f`;
-  }
-
+  };
   return results;
 }
 
 function checkForm(results) {
-  console.log(results);
-
   switch (results) {
     case `ff`:
       alert(`Check your email and zip code`);
       return false;
     case `tf`:
-      console.log(`switch triggered`);
-      console.log(results);
       alert(`Check your zip code plz`);
       return false;
-
     case `ft`: {
-      console.log(`switch triggered`);
       alert(`Give us your goddamn email`);
       return false;
     }
     case `tt`: {
-      console.log(`switch triggered`);
       alert(`Thanks for your info!`);
       return true;
     }
@@ -108,9 +99,8 @@ zipInput.addEventListener(`input`, function () {
 
 practiceForm.addEventListener(`submit`, function (event) {
   event.preventDefault();
-
   let results = gatherResults();
-if (checkForm(results)){
-  practiceForm.reset();
-}
+  if (checkForm(results)) {
+    practiceForm.reset();
+  }
 });
