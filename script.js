@@ -3,7 +3,9 @@ const emailInput = document.getElementById(`emailInput`);
 const emailError = document.getElementById(`emailError`);
 const zipInput = document.getElementById(`zipInput`);
 const passwordInput = document.getElementById(`passwordInput`);
+const passwordError = document.getElementById(`passwordError`);
 const confirmPasswordInput = document.getElementById(`confirmPasswordInput`);
+const confirmPasswordError = document.getElementById(`confirmPasswordError`);
 
 function checkEmailInput() {
   if (emailInput.validity.typeMismatch) {
@@ -48,18 +50,33 @@ function checkZipInput() {
   }
 }
 
+function checkPasswordLength() {
+  let checkPassed = false;
+  if (passwordInput.value.length < 8) {
+    passwordInput.classList.add(`invalid`);
+    passwordError.classList.add(`active`);
+    passwordError.textContent = `Password must be at least 8 characters`;
+  } else {
+    passwordInput.classList.remove(`invalid`);
+    passwordError.classList.remove(`active`);
+    passwordError.textContent = ``;
+    checkPassed = true;
+  }
+  return checkPassed;
+}
+
 function gatherResults() {
   let results = "";
   if (checkEmailInput()) {
     results += `t`;
   } else {
     results += `f`;
-  };
+  }
   if (checkZipInput()) {
     results += `t`;
   } else {
     results += `f`;
-  };
+  }
   return results;
 }
 
@@ -96,6 +113,10 @@ emailInput.addEventListener(`input`, function () {
 zipInput.addEventListener(`input`, function () {
   checkZipInput();
 });
+
+passwordInput.addEventListener(`input`, function(){
+  checkPasswordLength();
+})
 
 practiceForm.addEventListener(`submit`, function (event) {
   event.preventDefault();
