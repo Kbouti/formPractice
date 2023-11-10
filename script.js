@@ -48,9 +48,8 @@ function checkZipInput() {
   }
 }
 
-function checkForm() {
+function gatherResults() {
   let results = "";
-
   if (checkEmailInput()) {
     results += `t`;
   } else {
@@ -63,28 +62,31 @@ function checkForm() {
     results += `f`;
   }
 
+  return results;
+}
+
+function checkForm(results) {
   console.log(results);
 
   switch (results) {
     case `ff`:
       alert(`Check your email and zip code`);
-      break;
-
+      return false;
     case `tf`:
       console.log(`switch triggered`);
       console.log(results);
       alert(`Check your zip code plz`);
-      break;
+      return false;
 
     case `ft`: {
       console.log(`switch triggered`);
       alert(`Give us your goddamn email`);
-      break;
+      return false;
     }
     case `tt`: {
       console.log(`switch triggered`);
       alert(`Thanks for your info!`);
-      break;
+      return true;
     }
     default:
       console.log(`default`);
@@ -106,7 +108,9 @@ zipInput.addEventListener(`input`, function () {
 
 practiceForm.addEventListener(`submit`, function (event) {
   event.preventDefault();
-  checkForm();
 
+  let results = gatherResults();
+if (checkForm(results)){
   practiceForm.reset();
+}
 });
